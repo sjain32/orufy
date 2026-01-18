@@ -6,7 +6,7 @@ import productsRoutes from "./Routes/products.routes.js";
 const app = express();
 
 const allowedOrigins = [
-  "https://orufyp.netlify.app",
+  "http://localhost:5173",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 //good to go
