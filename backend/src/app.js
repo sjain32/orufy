@@ -24,9 +24,6 @@ app.use(
   })
 );
 
-// REQUIRED for preflight
-app.options("*", cors());
-
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
@@ -34,3 +31,4 @@ app.use("/auth", authRoutes);
 app.use("/products", productsRoutes);
 
 export default app;
+  
