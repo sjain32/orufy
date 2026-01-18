@@ -1,4 +1,9 @@
+import express from "express";
 import cors from "cors";
+import authRoutes from "./Routes/auth.routes.js";
+import productsRoutes from "./Routes/products.routes.js";
+
+const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -9,11 +14,9 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin) return cb(null, true); // allow Postman, curl
-      if (allowedOrigins.includes(origin)) {
-        return cb(null, true);
-      }
-      return cb(null, false); // ❗ DO NOT throw error
+      if (!origin) return cb(null, true); // Postman / curl
+      if (allowedOrigins.includes(origin)) return cb(null, true);
+      return cb(null, false); // ❌ never throw
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -21,5 +24,13 @@ app.use(
   })
 );
 
-// ✅ REQUIRED for preflight
+// REQUIRED for preflight
 app.options("*", cors());
+
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+app.use("/auth", authRoutes);
+app.use("/products", productsRoutes);
+
+export default app;
