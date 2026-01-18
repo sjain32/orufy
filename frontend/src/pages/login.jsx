@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OTPInput from "../components/otp.jsx";
 import { requestOtp, verifyOtp } from "../api/authApi.js";
-import loginIllustration from "../assets/Frame 2.png";
-import logoImage from "../assets/Frame 4.png";
+import loginIllustration from "../assets/Frame_t.png";
+import logoImage from "../assets/Frame_f.png";
 
 function Login() {
   const [email, setEmail] = useState("");
