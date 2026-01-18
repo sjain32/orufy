@@ -206,9 +206,9 @@ function Products() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-100 flex">
+    <div className="min-h-screen bg-slate-100 flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="w-56 bg-slate-900 text-white flex flex-col">
+      <aside className="hidden md:flex w-56 bg-slate-900 text-white flex-col">
         <div className="px-6 py-5">
           <img src={logoImage} alt="Productr logo" className="h-7 w-auto" />
         </div>
@@ -225,20 +225,22 @@ function Products() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="bg-[#f8fafc] border-b border-gray-200 px-8 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-gray-900">Products</h1>
-            <div className="flex items-center gap-4">
-              <div className="relative">
+        <div className="bg-[#f8fafc] border-b border-gray-200 px-4 md:px-8 py-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
+              Products
+            </h1>
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:items-center md:gap-4">
+              <div className="relative w-full md:w-auto">
                 <input
                   type="text"
                   placeholder="Search existing products"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white w-72 text-sm"
+                  className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white w-full md:w-72 text-sm"
                 />
                 <svg
-                  className="absolute left-3 top-3 h-5 w-5 text-gray-400"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -256,7 +258,7 @@ function Products() {
                   resetForm();
                   setShowModal(true);
                 }}
-                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2 font-medium text-sm shadow-sm"
+                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2 font-medium text-sm shadow-sm w-full sm:w-auto justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +274,7 @@ function Products() {
                 </svg>
                 Add Products
               </button>
-              <div className="relative group">
+              <div className="relative group w-full sm:w-auto flex justify-end">
                 <button className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors">
                   <svg
                     className="h-5 w-5 text-gray-600"
@@ -302,15 +304,17 @@ function Products() {
         </div>
 
         {/* Main */}
-        <div className="flex-1 p-8 bg-white">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-semibold text-gray-900">Products</h2>
+        <div className="flex-1 p-4 md:p-8 bg-white">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900">
+              Products
+            </h2>
             <button
               onClick={() => {
                 resetForm();
                 setShowModal(true);
               }}
-              className="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all flex items-center gap-2 font-medium text-sm shadow-sm"
+              className="hidden md:inline-flex bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all items-center gap-2 font-medium text-sm shadow-sm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -329,14 +333,14 @@ function Products() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-8 border-b-2 border-gray-200 mb-8">
+          <div className="flex gap-6 border-b-2 border-gray-200 mb-8 overflow-x-auto">
             {["published", "drafts"].map((tab) => (
               <button
                 key={tab}
                 onClick={() =>
                   setActiveTab(tab === "drafts" ? "unpublished" : "published")
                 }
-                className={`pb-3 px-1 font-semibold text-sm transition-all ${
+                className={`pb-3 px-1 font-semibold text-sm transition-all whitespace-nowrap ${
                   activeTab === (tab === "drafts" ? "unpublished" : "published")
                     ? "border-b-2 border-blue-600 text-blue-600 -mb-[2px]"
                     : "text-gray-500 hover:text-gray-700"
@@ -390,7 +394,7 @@ function Products() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
               {searchedProducts.map((p) => (
                 <ProductCard
                   key={p._id}
@@ -408,8 +412,8 @@ function Products() {
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[95vh] overflow-hidden flex flex-col">
-              <div className="bg-white border-b border-gray-200 px-8 py-5 flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+              <div className="bg-white border-b border-gray-200 px-5 md:px-8 py-4 md:py-5 flex justify-between items-center">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
                   {editingProduct ? "EDIT PRODUCT" : "ADD PRODUCT"}
                 </h2>
                 <button
@@ -436,7 +440,7 @@ function Products() {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-8">
+              <div className="flex-1 overflow-y-auto p-5 md:p-8">
                 {formError && (
                   <div className="mb-5 p-4 bg-red-50 border-l-4 border-red-500 rounded">
                     <p className="text-red-700 text-sm font-medium">
@@ -532,7 +536,7 @@ function Products() {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                       <label
                         htmlFor="product-mrp"
@@ -616,7 +620,7 @@ function Products() {
                       </label>
                     </div>
                     {uploadedImages.length > 0 && (
-                      <div className="mt-4 grid grid-cols-5 gap-3">
+                      <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
                         {uploadedImages.map((img, idx) => (
                           <div key={idx} className="relative group">
                             <img
@@ -678,21 +682,21 @@ function Products() {
                     </label>
                   </div>
 
-                  <div className="flex justify-end gap-4 pt-6 border-t border-gray-200">
+                  <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 sm:gap-4 pt-6 border-t border-gray-200">
                     <button
                       type="button"
                       onClick={() => {
                         setShowModal(false);
                         resetForm();
                       }}
-                      className="px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all font-medium"
+                      className="w-full sm:w-auto px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all font-medium"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={formLoading}
-                      className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-all font-semibold shadow-md hover:shadow-lg"
+                      className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-all font-semibold shadow-md hover:shadow-lg"
                     >
                       {formLoading
                         ? editingProduct
@@ -713,7 +717,7 @@ function Products() {
         {deleteConfirm && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
-              <div className="p-8">
+              <div className="p-6 md:p-8">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900">
                     Delete Product
@@ -745,16 +749,16 @@ function Products() {
                   </span>
                   ?
                 </p>
-                <div className="flex justify-end gap-4">
+                <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 sm:gap-4">
                   <button
                     onClick={() => setDeleteConfirm(null)}
-                    className="px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all font-medium"
+                    className="w-full sm:w-auto px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all font-medium"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all font-semibold shadow-md hover:shadow-lg"
+                    className="w-full sm:w-auto px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all font-semibold shadow-md hover:shadow-lg"
                   >
                     Delete
                   </button>

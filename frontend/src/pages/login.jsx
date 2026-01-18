@@ -63,8 +63,8 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fb] flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
+    <div className="min-h-screen bg-[#f8f9fb] flex items-center justify-center p-4 md:p-8">
+      <div className="w-full max-w-md md:max-w-5xl bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
         <div className="relative hidden md:block bg-[#eef0f8]">
           <img
             src={loginIllustration}
@@ -74,15 +74,15 @@ function Login() {
          
         </div>
 
-        <div className="p-8 md:p-12 flex flex-col justify-center">
-          <div className="md:hidden mb-8">
+        <div className="p-6 sm:p-8 md:p-12 flex flex-col justify-center">
+          <div className="md:hidden mb-6">
             <img
               src={logoImage}
               alt="Productr logo"
               className="h-8 w-auto"
             />
           </div>
-          <h1 className="text-xl md:text-2xl font-semibold text-gray-900 text-center">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 text-center">
             {step === "email"
               ? "Login to your Productr Account"
               : "Verify OTP"}
@@ -98,7 +98,7 @@ function Login() {
           )}
 
           {step === "email" ? (
-            <form onSubmit={handleSendOTP} className="mt-8 space-y-4">
+            <form onSubmit={handleSendOTP} className="mt-6 sm:mt-8 space-y-4">
               <div className="space-y-2">
                 <label
                   htmlFor="login-email"
@@ -125,7 +125,7 @@ function Login() {
               </button>
             </form>
           ) : (
-            <div className="mt-8 space-y-4">
+            <div className="mt-6 sm:mt-8 space-y-4">
               <OTPInput onChangeOTP={setOtp} />
               <button
                 onClick={handleVerifyOTP}

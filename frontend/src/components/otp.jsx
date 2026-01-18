@@ -35,7 +35,7 @@ function OTPInput({ onChangeOTP }) {
   };
 
   return (
-    <div onPaste={handlePaste} className="flex justify-center gap-3">
+    <div onPaste={handlePaste} className="flex justify-center gap-2 sm:gap-3">
       {otp.map((digit, index) => (
         <input
           key={index}
@@ -44,7 +44,7 @@ function OTPInput({ onChangeOTP }) {
           maxLength="1"
           value={digit}
           onChange={(e) => handleChange(e, index)}
-          className="w-12 h-14 border-2 rounded-lg text-center text-xl focus:border-blue-600"
+          className="w-10 h-12 sm:w-12 sm:h-14 border-2 rounded-lg text-center text-lg sm:text-xl focus:border-blue-600"
         />
       ))}
     </div>

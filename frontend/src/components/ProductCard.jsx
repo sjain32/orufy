@@ -5,7 +5,11 @@ function ProductCard({ product, onEdit, onTogglePublish, onDelete }) {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-      <img src={image} alt={product.Name} className="h-44 w-full object-cover" />
+      <img
+        src={image}
+        alt={product.Name}
+        className="h-40 sm:h-44 w-full object-cover"
+      />
 
       <div className="p-4 space-y-2">
         <div className="flex justify-between items-start gap-2">
@@ -29,7 +33,7 @@ function ProductCard({ product, onEdit, onTogglePublish, onDelete }) {
           <p>Stock: {product.Quantiy}</p>
         </div>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center flex-wrap">
           <span className="text-lg font-semibold text-blue-600">
             ₹{product.Selling_Price}
           </span>
@@ -38,7 +42,7 @@ function ProductCard({ product, onEdit, onTogglePublish, onDelete }) {
           </span>
         </div>
 
-        <div className="flex gap-2 pt-2">
+        <div className="flex flex-wrap gap-2 pt-2">
           <button
             onClick={() => onTogglePublish?.(product._id)}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
