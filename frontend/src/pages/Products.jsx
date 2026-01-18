@@ -8,7 +8,7 @@ import {
   togglePublishProduct,
 } from "../api/productApi";
 import ProductCard from "../components/ProductCard";
-import logoImage from "../assets/Frame 4.png";
+import logoImage from "../assets/Frame_f.png";
 
 const PRODUCT_TYPES = [
   "Electronics",
