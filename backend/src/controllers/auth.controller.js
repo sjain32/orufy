@@ -26,9 +26,13 @@ export const requestOTP = async (req, res) => {
     await sendOTP(email, otp);
 
     res.status(200).json({ message: "OTP sent to email" });
-  } catch {
-    res.status(500).json({ message: "Internal server error" });
-  }
+  } 
+    catch (err) {
+      console.error("OTP ERROR:", err);
+      res.status(500).json({ message: "Server error" });
+    }
+    
+  
 };
 
 export const verifyOTP = async (req, res) => {
