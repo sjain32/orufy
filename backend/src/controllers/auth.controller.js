@@ -24,11 +24,19 @@ export const requestOTP = async (req, res) => {
 
     await user.save();
 
+    const withTimeout = (promise, ms) =>
+      Promise.race([
+        promise,
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("SMTP timeout")), ms)
+        ),
+      ]);
+
     try {
-      await sendOTP(email, otp);
+      await withTimeout(sendOTP(email, otp), 20000);
       return res.status(200).json({ message: "OTP sent to email" });
     } catch (mailErr) {
-      console.error("OTP email failed:", mailErr);
+      console.error("OTP email failed/timeout:", mailErr);
       return res.status(200).json({
         message: "OTP generated (email blocked). Use the displayed OTP.",
         otp,
