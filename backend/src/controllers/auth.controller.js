@@ -23,16 +23,21 @@ export const requestOTP = async (req, res) => {
     }
 
     await user.save();
-    await sendOTP(email, otp);
 
-    res.status(200).json({ message: "OTP sent to email" });
-  } 
-    catch (err) {
-      console.error("OTP ERROR:", err);
-      res.status(500).json({ message: "Server error" });
+    try {
+      await sendOTP(email, otp);
+      return res.status(200).json({ message: "OTP sent to email" });
+    } catch (mailErr) {
+      console.error("OTP email failed:", mailErr);
+      return res.status(200).json({
+        message: "OTP generated (email blocked). Use the displayed OTP.",
+        otp,
+      });
     }
-    
-  
+  } catch (err) {
+    console.error("OTP ERROR:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
 };
 
 export const verifyOTP = async (req, res) => {

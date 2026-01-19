@@ -28,7 +28,10 @@ function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      await requestOtp(email);
+      const res = await requestOtp(email);
+      if (res?.otp) {
+        window.alert(`Your OTP is: ${res.otp}`);
+      }
       setStep("otp");
       setTimer(60);
       setCanResend(false);
